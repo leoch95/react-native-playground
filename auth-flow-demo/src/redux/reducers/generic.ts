@@ -25,7 +25,11 @@ const _setLoading: CaseReducer<GenericState, PayloadAction<boolean>> = (
 const _restoreToken: CaseReducer<
 	GenericState,
 	PayloadAction<string | null | undefined>
-> = (state, action) => ({ ...state, userToken: action.payload });
+> = (state, action) => ({
+	...state,
+	userToken: action.payload,
+	isLoading: false,
+});
 
 const _signIn: CaseReducer<
 	GenericState,
