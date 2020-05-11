@@ -21,10 +21,18 @@ const validationSchema = Yup.object().shape({
 interface TextInputProp {
 	label: string;
 	formikKey: keyof LoginCredentials;
+	multiline?: boolean;
+	secureTextEntry?: boolean;
 	props: FormikProps<LoginCredentials>;
 }
 
-const TextInput = ({ label, formikKey, props }: TextInputProp) => {
+const TextInput = ({
+	label,
+	formikKey,
+	multiline,
+	secureTextEntry,
+	props,
+}: TextInputProp) => {
 	let {
 		touched,
 		errors,
@@ -47,6 +55,8 @@ const TextInput = ({ label, formikKey, props }: TextInputProp) => {
 						: undefined
 				}
 				editable={!isSubmitting}
+				multiline={multiline}
+				secureTextEntry={!!!multiline && secureTextEntry}
 			/>
 		</View>
 	);
@@ -57,7 +67,12 @@ const LoginFrom = (props: FormikProps<LoginCredentials>) => {
 	return (
 		<View padder>
 			<TextInput label="Username" formikKey="username" props={props} />
-			<TextInput label="Password" formikKey="password" props={props} />
+			<TextInput
+				label="Password"
+				formikKey="password"
+				props={props}
+				secureTextEntry
+			/>
 			<View
 				padder
 				style={{
