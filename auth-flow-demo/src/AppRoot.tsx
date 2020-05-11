@@ -4,7 +4,7 @@ import { Root } from "native-base";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { configureAppStore } from "./redux";
-import Dummy from "./components/Dummy";
+import { AppNavigation } from "./navigation";
 
 let { store, persistor } = configureAppStore();
 
@@ -12,7 +12,7 @@ const AppRoot = () => (
 	<Root>
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persistor}>
-				<Dummy />
+				<AppNavigation />
 			</PersistGate>
 		</Provider>
 	</Root>

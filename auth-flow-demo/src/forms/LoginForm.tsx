@@ -5,11 +5,6 @@ import { Input } from "react-native-elements";
 import * as Yup from "yup";
 import { LoginCredentials } from "../context/AuthContext";
 
-// interface LoginFromValues {
-// 	username: string;
-// 	password: string;
-// }
-
 interface LoginFromProp {
 	login: (credentials: LoginCredentials) => void;
 }
@@ -25,11 +20,11 @@ const validationSchema = Yup.object().shape({
 
 interface TextInputProp {
 	label: string;
-	key: keyof LoginCredentials;
+	formikKey: keyof LoginCredentials;
 	props: FormikProps<LoginCredentials>;
 }
 
-const TextInput = ({ label, key, props }: TextInputProp) => {
+const TextInput = ({ label, formikKey, props }: TextInputProp) => {
 	let {
 		touched,
 		errors,
@@ -42,12 +37,14 @@ const TextInput = ({ label, key, props }: TextInputProp) => {
 		<View padder>
 			<Input
 				label={label}
-				value={values[key]}
-				onChangeText={handleChange(key)}
-				onBlur={handleBlur(key)}
+				value={values[formikKey]}
+				onChangeText={handleChange(formikKey)}
+				onBlur={handleBlur(formikKey)}
 				errorStyle={{ color: "#ff0000" }}
 				errorMessage={
-					!!(touched[key] && errors[key]) ? errors[key] : undefined
+					!!(touched[formikKey] && errors[formikKey])
+						? errors[formikKey]
+						: undefined
 				}
 				editable={!isSubmitting}
 			/>
@@ -59,8 +56,8 @@ const LoginFrom = (props: FormikProps<LoginCredentials>) => {
 	let { touched, errors, isSubmitting, handleSubmit, handleReset } = props;
 	return (
 		<View padder>
-			<TextInput label="Username" key="username" props={props} />
-			<TextInput label="Password" key="password" props={props} />
+			<TextInput label="Username" formikKey="username" props={props} />
+			<TextInput label="Password" formikKey="password" props={props} />
 			<View
 				padder
 				style={{

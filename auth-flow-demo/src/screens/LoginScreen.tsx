@@ -13,7 +13,7 @@ interface LoginScreenProp {}
 type LoginScreenStackNavigationProp = StackNavigationProp<ParamListBase>;
 
 const LoginScreen = ({}: LoginScreenProp) => {
-	const { signIn, signOut, signUp } = useContext(AuthContext);
+	const { signIn } = useContext(AuthContext);
 
 	const stackNav = useNavigation<LoginScreenStackNavigationProp>();
 
@@ -39,8 +39,7 @@ const LoginScreen = ({}: LoginScreenProp) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#ffffff",
-		alignItems: "center",
+		alignItems: "stretch",
 		justifyContent: "center",
 	},
 });

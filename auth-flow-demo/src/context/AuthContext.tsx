@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-interface AuthContextMethod {
+export interface AuthContextMethod {
 	signIn: (data: LoginCredentials) => Promise<void>;
 	signOut: () => void;
 	signUp: (data: LoginCredentials) => Promise<void>;

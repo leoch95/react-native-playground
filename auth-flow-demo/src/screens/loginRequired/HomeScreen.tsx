@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Container, Body, View, Text } from "native-base";
 import { useNavigation, ParamListBase } from "@react-navigation/native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { Header } from "../../components/header";
 import { AuthDrawerNavParamList } from "../../navigation/loginRequired/AuthNavigation";
+import { AuthContext } from "../../context";
 
-interface HomeScreenProp {
-	logout: () => void;
-}
+interface HomeScreenProp {}
 
 type HomeScreenDrawerNavigationProp = DrawerNavigationProp<
 	AuthDrawerNavParamList
 >;
 
-const HomeScreen = ({ logout }: HomeScreenProp) => {
+const HomeScreen = ({}: HomeScreenProp) => {
+	const { signOut } = useContext(AuthContext);
+
 	const drawerNav = useNavigation<HomeScreenDrawerNavigationProp>();
 
 	return (
@@ -24,7 +25,7 @@ const HomeScreen = ({ logout }: HomeScreenProp) => {
 				onLeftIconPress={drawerNav.toggleDrawer}
 				title="Home"
 				rightIcon="power"
-				onRightIconPress={logout}
+				onRightIconPress={signOut}
 			/>
 			<Body>
 				<View style={styles.container}>
