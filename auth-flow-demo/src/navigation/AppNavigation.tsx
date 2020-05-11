@@ -53,8 +53,6 @@ const AppNavigation = ({
 		};
 
 		loadFonts();
-
-		return () => {};
 	}, []);
 
 	useEffect(() => {
@@ -63,7 +61,6 @@ const AppNavigation = ({
 			restoreToken(token);
 		};
 		bootstrapAsync();
-		return () => {};
 	}, []);
 
 	const authContext = useMemo<AuthContextMethod>(
@@ -91,7 +88,7 @@ const AppNavigation = ({
 		}),
 		[]
 	);
-	if (!ready) return <Stack.Screen name="Loading" component={SplashScreen} />;
+	if (!ready) return <Stack.Screen name="Splash" component={SplashScreen} />;
 
 	return (
 		<AuthContext.Provider value={authContext}>
